@@ -1,7 +1,6 @@
 import calculate.BMICalculator;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -12,7 +11,7 @@ public class BMICalculatorTest {
 
     @Test
     @Parameters({"70, 1.8, normal", "50, 1.83, very severely underweight",
-            "90, 1.75, overweight", "150, 1.7, obese high class"})
+            "90, 1.75, overweight", "150, 1.7, super obese"})
     public void testDifferentBMI(double weight, double height, String bmiStatus) {
         double bmiExpectedResult = weight / Math.pow(height, 2);
         String expected = String.format("Your BMI is: %.2f", bmiExpectedResult);

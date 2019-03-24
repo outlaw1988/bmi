@@ -1,5 +1,7 @@
 package calculate;
 
+import java.util.Arrays;
+
 public class BMICalculator implements Calculator {
 
     private double weight;
@@ -24,23 +26,18 @@ public class BMICalculator implements Calculator {
 
     @Override
     public String interpret() {
-        String bmiResult = "";
+        double[] bmiNumers = {15, 16, 18.5, 25, 30, 35, 40, 45, 50, 60};
+        String[] bmiResults = {"very severely underweight", "severely underweight", "underweight",
+                "normal", "overweight", "moderately obese", "severely obese",
+                "very severely obese", "morbidly obese", "super obese", "hyper obese"};
 
-        if (bmi <= 15) {
-            bmiResult = "very severely underweight";
-        } else if (bmi > 15 && bmi <= 16) {
-            bmiResult = "severely underweight";
-        } else if (bmi > 16 && bmi <= 18.5) {
-            bmiResult = "underweight";
-        } else if (bmi > 18.5 && bmi <= 25 ) {
-            bmiResult = "normal";
-        } else if (bmi > 25 && bmi <= 30) {
-            bmiResult = "overweight";
-        } else if (bmi > 30 && bmi <= 35) {
-            bmiResult = "obese class I";
-        } else if (bmi > 35) {
-            bmiResult = "obese high class";
+        int index = Arrays.binarySearch(bmiNumers, bmi);
+
+        if (index < 0) {
+            index = Math.abs(index) - 1;
         }
+
+        String bmiResult = bmiResults[index];
 
         return String.format("You're %s", bmiResult);
     }
