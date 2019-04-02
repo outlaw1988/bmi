@@ -11,7 +11,7 @@ public class BMICalculatorTest {
 
     @Test
     @Parameters({"70, 1.8, normal", "50, 1.83, very severely underweight",
-            "90, 1.75, overweight", "150, 1.7, super obese"})
+            "90, 1.75, overweight", "150, 1.7, super obese", "180, 1.5, hyper obese"})
     public void testDifferentBMI(double weight, double height, String bmiStatus) {
         double bmiExpectedResult = weight / Math.pow(height, 2);
         String expected = String.format("Your BMI is: %.2f", bmiExpectedResult);
@@ -27,7 +27,7 @@ public class BMICalculatorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void belowZero() {
-        BMICalculator bmi = new BMICalculator(0, 5);
+        BMICalculator bmi = new BMICalculator(0, -1);
     }
 
 }

@@ -1,19 +1,24 @@
 import calculate.BMICalculator;
-
-import java.util.Scanner;
+import picocli.CommandLine;
+import picocli.CommandLine.*;
 
 public class Main {
 
+    @Option(names = { "-ht", "--height" }, description = "Height [m]")
+    private static double height;
+
+    @Option(names = { "-w", "--weight" }, description = "Weight [kg]")
+    private static double weight;
+
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help and exit")
+    private static boolean help;
+
     public static void main(String[] args) {
-
-        double height;
-        double weight;
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter your height [m]: ");
-        height = sc.nextDouble();
-        System.out.println("Please enter your weight [kg]: ");
-        weight = sc.nextDouble();
+        Main app = CommandLine.populateCommand(new Main(), args);
+        if (help || args.length == 0) {
+            CommandLine.usage(new Main(), System.out);
+            return;
+        }
 
         try {
             BMICalculator bmi = new BMICalculator(height, weight);
